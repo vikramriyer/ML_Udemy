@@ -44,7 +44,50 @@ y_pred = regressor.predict(X_test)
 #print (y_pred)
 #print (y_test)
 
+'''
 for i,j in zip(y_pred, y_test):
   print i-j
+'''
 
-#Using backward elimination
+#Using backward elimination to build the model
+
+import statsmodels.formula.api as sm
+#adding intercept X0
+X = np.append(arr=np.ones((50, 1)).astype(int), values=X, axis=1)
+X_opt = X[:, [0, 1, 2, 3, 4, 5]]
+
+regressor_ols = sm.OLS(endog = y, exog = X_opt).fit()
+print regressor_ols.summary()
+
+#Now, remove x2
+X_opt = X[:, [0, 1, 3, 4, 5]]
+
+regressor_ols = sm.OLS(endog = y, exog = X_opt).fit()
+print regressor_ols.summary()
+
+#Now, remove x1
+X_opt = X[:, [0, 3, 4, 5]]
+
+regressor_ols = sm.OLS(endog = y, exog = X_opt).fit()
+print regressor_ols.summary()
+
+#Now, remove x2 (note that, this x2 is not the one previously used)
+X_opt = X[:, [0, 3, 5]]
+
+regressor_ols = sm.OLS(endog = y, exog = X_opt).fit()
+print regressor_ols.summary()
+
+#Now, remove x2 (note that, this x2 is not the one previously used)
+X_opt = X[:, [0, 3]]
+
+regressor_ols = sm.OLS(endog = y, exog = X_opt).fit()
+print regressor_ols.summary()
+
+from sklearn.linear_model import LinearRegression
+regressor = LinearRegression()
+regressor.fit(X_train[:, 3], y_train)
+
+# Predicting the Test set results
+y_pred = regressor.predict(X_test)
+print (y_pred)
+print (y_test)

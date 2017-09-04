@@ -33,7 +33,8 @@ regressor.fit(X_train, y_train)
 
 # Predicting the Test set results
 y_pred = regressor.predict(X_test)
-
+print "15 years salaary = {}".format(regressor.predict(np.array(15)))
+print "20 years salaary = {}".format(regressor.predict(np.array(20)))
 '''
 # Uncomment the entire block to view the visualization
 # Visualising the Training set results
@@ -54,5 +55,5 @@ plt.show()
 ''' 
 
 # Compare the below values and see how the values have varied in the original (y_test) and the predicted (y_pred)
-print y_test
-print y_pred
+#print y_test
+#print y_pred

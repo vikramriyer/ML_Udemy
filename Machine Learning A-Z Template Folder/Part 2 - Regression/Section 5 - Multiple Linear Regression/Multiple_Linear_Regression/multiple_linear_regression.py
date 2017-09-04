@@ -4,6 +4,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+from sklearn.metrics import accuracy_score
 
 # Importing the dataset
 dataset = pd.read_csv('50_Startups.csv')
@@ -40,3 +41,10 @@ regressor.fit(X_train, y_train)
 
 # Predicting the Test set results
 y_pred = regressor.predict(X_test)
+#print (y_pred)
+#print (y_test)
+
+for i,j in zip(y_pred, y_test):
+  print i-j
+
+#Using backward elimination
